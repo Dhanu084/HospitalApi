@@ -1,7 +1,7 @@
-const Doctor = require('../models/doctor');
+const Doctor = require('../../../models/doctor');
 const jwt = require('jsonwebtoken');
 
-module.exports.addDoctor = async function(req,res){
+module.exports.addDoctor = async function(req,res){//function to add doctor
     try{
         let doctor = await Doctor.create(req.body);
         return res.json(200,{
@@ -15,15 +15,15 @@ module.exports.addDoctor = async function(req,res){
     }
 }
 
-module.exports.homePage = function(req,res){
+module.exports.homePage = function(req,res){//function to display the register page (optional use)
     res.render('doctor.ejs',{})
 }
 
 module.exports.login = async function(req,res){
-    console.log(req.body);
+    //console.log(req.body);
     try{
-        let user = await Doctor.findById(req.body._id);
-        console.log(user);
+        let user = await Doctor.findById(req.body._id);//find the user
+        //console.log(user);
         if(!user){
             return json(422,{
                 message:'Invalid username/password'
@@ -33,7 +33,7 @@ module.exports.login = async function(req,res){
         return res.json(200,{
             message:'Sign in successful',
             data:{
-                token : jwt.sign(user.toJSON(),'hospital',{expiresIn:'10000'}),
+                token : jwt.sign(user.toJSON(),'hospital',{expiresIn:'10000'}),//create token and send in JSON
             },
             message:'success'
         })
@@ -45,6 +45,6 @@ module.exports.login = async function(req,res){
     }
 }
 
-module.exports.log = function(req,res){
+module.exports.log = function(req,res){//function to display the login page (optional use)
     res.render('doctor_login.ejs');
 }

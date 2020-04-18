@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const doctorController = require('../../../contollers/doctorsController');
-const patientController = require('../../../contollers/patientController');
-const reportController = require('../../../contollers/reportController');
+const doctorController = require('../../../contollers/api/v1/doctorsController');
+const patientController = require('../../../contollers/api/v1/patientController');
+const reportController = require('../../../contollers/api/v1/reportController');
 //routes for doctors
 router.post('/doctors/register',doctorController.addDoctor);
 router.post('/doctors/login',doctorController.login);

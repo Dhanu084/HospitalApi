@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const port = 8000;
 const db = require('./config/mongoose');
-const passport = require('passport');
-const passportJWT = require('./config/passport-jwt-strategy');
+const passport = require('passport');//require passport to use JWT
+const passportJWT = require('./config/passport-jwt-strategy');//require passport JWT for API authentication
+
 
 app.use(express.urlencoded());
 app.use(express.json());
