@@ -33,7 +33,9 @@ module.exports.login = async function(req,res){
         if(!user){
             return res.json(422,{message:"Invalid username/password"})
         }
-        if(user)
+        if(user && user.password!==req.body.password || user.name!==req.body.name){
+            return res.json(422,{message:"Invalid username/password"})
+        }
         return res.status(200).send({
             message:'Sign in successful',
             token:jwt.sign(user.toJSON(),'hospital',{expiresIn:'10000'})
