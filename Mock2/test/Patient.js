@@ -1,7 +1,6 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let Doctor = require('../models/doctor');
 let server = require('../index');
 
 chai.should();

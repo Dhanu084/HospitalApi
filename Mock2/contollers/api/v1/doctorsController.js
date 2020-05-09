@@ -2,7 +2,7 @@ const Doctor = require('../../../models/doctor');
 const jwt = require('jsonwebtoken');
 
 module.exports.addDoctor =  function(req,res){//function to add doctor
-    console.log(req.body);
+    //console.log(req.body);
     //try{
         let doctor = Doctor.create(req.body,function(err,doctor){
             if(err){
