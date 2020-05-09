@@ -22,3 +22,5 @@ app.listen(port,function(err)
         return;
     }
 })
+
+module.exports = app;

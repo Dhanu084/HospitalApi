@@ -1,18 +1,24 @@
 const Doctor = require('../../../models/doctor');
 const jwt = require('jsonwebtoken');
 
-module.exports.addDoctor = async function(req,res){//function to add doctor
-    try{
-        let doctor = await Doctor.create(req.body);
-        return res.json(200,{
-            data: doctor
-        })
-    }
-    catch(err){
-        res.json(500,{
-            data : err
-        })
-    }
+module.exports.addDoctor =  function(req,res){//function to add doctor
+    console.log(req.body);
+    //try{
+        let doctor = Doctor.create(req.body,function(err,doctor){
+            if(err){
+                if(doctor==null) {
+                    return res.status(500).send({message:"Internal Server Error"});
+                }
+            }
+            return res.status(200).send({message:doctor});
+        });
+        
+        
+    // }
+    // catch(err){
+    //     console.log(err);
+    //     res.status(500).send(err);
+    // }
 }
 
 module.exports.homePage = function(req,res){//function to display the register page (optional use)
@@ -25,20 +31,21 @@ module.exports.login = async function(req,res){
         let user = await Doctor.findById(req.body._id);//find the user
         //console.log(user);
         if(!user){
-            return json(422,{
-                message:'Invalid username/password'
-            })
+            return res.json(422,{message:"Invalid username/password"})
         }
-
-        return res.json(200,{
+        if(user)
+        return res.status(200).send({
             message:'Sign in successful',
-            data:{
-                token : jwt.sign(user.toJSON(),'hospital',{expiresIn:'10000'}),//create token and send in JSON
-            },
-            message:'success'
+            token:jwt.sign(user.toJSON(),'hospital',{expiresIn:'10000'})
         })
+        // data:{
+        //     token : jwt.sign(user.toJSON(),'hospital',{expiresIn:'10000'}),//create token and send in JSON
+        // }}
+            // message:'success'
+        //})
     }
     catch(err){
+        console.log(err);
         res.json(500,{
             data:err
         })
