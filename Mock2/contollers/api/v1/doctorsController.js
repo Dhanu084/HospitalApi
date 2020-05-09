@@ -6,10 +6,12 @@ module.exports.addDoctor =  function(req,res){//function to add doctor
     //try{
         let doctor = Doctor.create(req.body,function(err,doctor){
             if(err){
-                if(doctor==null) {
+                //if(doctor==null) {
+                    //console.log(err);
                     return res.status(500).send({message:"Internal Server Error"});
-                }
+                //}
             }
+            console.log(doctor);
             return res.status(200).send({message:doctor});
         });
         
@@ -26,14 +28,14 @@ module.exports.homePage = function(req,res){//function to display the register p
 }
 
 module.exports.login = async function(req,res){
-    //console.log(req.body);
+    console.log(req.body);
     try{
-        let user = await Doctor.findById(req.body._id);//find the user
+        let user = await Doctor.findById(req.body.id);//find the user
         //console.log(user);
         if(!user){
             return res.json(422,{message:"Invalid username/password"})
         }
-        if(user && user.password!==req.body.password || user.name!==req.body.name){
+        if(user.password!=req.body.password || user.name!=req.body.name){
             return res.json(422,{message:"Invalid username/password"})
         }
         return res.status(200).send({

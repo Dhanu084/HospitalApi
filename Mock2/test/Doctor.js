@@ -43,10 +43,10 @@ describe('/POST doctor',()=>{
       });
 });
 
-describe('/POST doctor',()=>{
+describe('/POST doctor with wrong password',()=>{
   it('it should return invalid username/password if username or password doesnt match', (done) => {
       let doctor = {
-        _id:"5eb68fbb90ca1b3cf4b6fffa",
+        id:"5eb68fbb90ca1b3cf4b6fffa",
         name: "Dhanush",
         password:"kfksavfaskv"
       }
@@ -66,7 +66,7 @@ describe('/POST doctor',()=>{
 describe('/POST doctor',()=>{
     it('it should get the JWT token of the logged in doctor', (done) => {
         let doctor = {
-          _id:"5eb68fbb90ca1b3cf4b6fffa",
+          id:"5eb68fbb90ca1b3cf4b6fffa",
           name: "Dhanush",
           password:"Dhanush"
         }

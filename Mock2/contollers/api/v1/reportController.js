@@ -8,7 +8,7 @@ module.exports.createReport = async function(req,res){//function to create Repor
         let report = await Report.create(req.body);//create the report
         await patient.report.push(report);//push it to the reports array of the patient
         await patient.save();
-        //console.log(patient);
+        console.log(report);
         return res.status(200).send({data:report});
     }
     catch(err){
@@ -24,7 +24,7 @@ module.exports.getReports = async function(req,res){//function to get reports
             if(err){
                 res.status(500).send({message:err});
             }
-            //console.log(reports);
+            console.log(reports);
             res.status(200).send({data:reports})
         })
             
@@ -66,6 +66,7 @@ module.exports.filterReport = async function(req,res){
         if(reports.length==0){
             return res.status(200).send({message:"No such reports"});
         }
+        console.log(reports);
         return res.json(200,{
             data:reports
         })
